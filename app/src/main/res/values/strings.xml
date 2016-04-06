@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Cars90</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_title">Cars</string>
+    <string name="tab_car_list_name">List of cars</string>
+    <string name="tab_car_new_name">New car</string>
+    <string name="ok">OK</string>
+    <string name="title_activity_car_preview">CarPreviewActivity</string>
+    <string name="brand_label">Brand</string>
+    <string name="model_label">Model</string>
+    <string name="date_of_manufacture_label">Date of manufacture</string>
+    <string name="registration_number_label">Registration Number</string>
+    <string name="is_available_label">Is Available?</string>
+    <string name="is_available">Available</string>
+    <string name="is_unavailable">Unavailable</string>
+</resources>
