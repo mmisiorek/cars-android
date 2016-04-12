@@ -1,5 +1,8 @@
 package android.cars.misiorek.net.cars90;
 
+import android.app.ActionBar;
+import android.cars.misiorek.net.cars90.android.cars.misiorek.net.cars90.model.Car;
+import android.cars.misiorek.net.cars90.android.cars.misiorek.net.cars90.model.Gson;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,7 +20,7 @@ import java.util.Date;
 
 public class CarPreviewActivity extends AppCompatActivity {
 
-    private JSONObject car;
+    private Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +30,9 @@ public class CarPreviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         try {
-            long start = (new Date()).getTime();
-            car = new JSONObject(getIntent().getStringExtra("car"));
-            long end = (new Date()).getTime();
+            car = Gson.getGson().fromJson(getIntent().getExtras().getString("car"), Car.class);
 
-            Log.e("mm", "convert back "+Long.valueOf(end-start).toString());
-
-            start = (new Date()).getTime();
-            setTitle(car.getString("brand")+" "+car.getString("model"));
+            setTitle(car.getBrand()+" "+car.getModel());
 
             TextView brandText = (TextView) findViewById(R.id.brandValue);
             TextView modelText = (TextView) findViewById(R.id.modelValue);
@@ -42,24 +40,19 @@ public class CarPreviewActivity extends AppCompatActivity {
             TextView registrationNumberText = (TextView) findViewById(R.id.registrationNumberValue);
             TextView isAvailableText = (TextView) findViewById(R.id.isAvailableValue);
 
-            brandText.setText(car.getString("brand"));
-            modelText.setText(car.getString("model"));
-            dateOfManufacturedText.setText(car.getString("manufactured_date"));
-            registrationNumberText.setText(car.getString("registration_number"));
-            isAvailableText.setText(car.getBoolean("is_available") ? getResources().getString(R.string.is_available) :
+            brandText.setText(car.getBrand());
+            modelText.setText(car.getModel());
+            dateOfManufacturedText.setText(car.getManufacturedDate().toString());
+            registrationNumberText.setText(car.getRegistrationNumber());
+            isAvailableText.setText(car.getIsAvailable().booleanValue() ? getResources().getString(R.string.is_available) :
                                         getResources().getString(R.string.is_unavailable));
-            end = (new Date()).getTime();
 
-            Log.e("mm", "other actions "+Long.valueOf(end-start).toString());
-
-            JSONObject obj = car.getJSONObject("photo");
-            if(obj != null) {
+            Log.e("asJSON", Gson.getGson().toJson(car));
+            if(car.getCarPhoto() != null) {
                 ImageView imageView = (ImageView) findViewById(R.id.photoCar);
 
-                Log.e("ksk", obj.toString());
-
                 CarPhotoTask task = new CarPhotoTask(imageView, imageView.getContext());
-                task.execute(new String[]{ String.valueOf(obj.getInt("id")), obj.getString("token")});
+                task.execute(new String[]{ String.valueOf(car.getCarPhoto().getNetworkId()), car.getCarPhoto().getToken()});
             }
         } catch(Exception e) {
             Log.e("z", Log.getStackTraceString(e));

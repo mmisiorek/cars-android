@@ -2,6 +2,8 @@ package android.cars.misiorek.net.cars90;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.cars.misiorek.net.cars90.android.cars.misiorek.net.cars90.model.Car;
+import android.cars.misiorek.net.cars90.android.cars.misiorek.net.cars90.model.Gson;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -51,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity.getBaseContext(), CarPreviewActivity.class);
-                List<JSONObject> carsList = task.getCarsList();
+                List<Car> carsList = task.getCarsList();
 
                 if(carsList.size() > position) {
                     long start = (new Date()).getTime();
-                    intent.putExtra("car", carsList.get(position).toString());
+                    intent.putExtra("car", Gson.getGson().toJson(carsList.get(position)));
                     long end = (new Date()).getTime();
 
                     Log.e("mm", Long.valueOf(end - start).toString());

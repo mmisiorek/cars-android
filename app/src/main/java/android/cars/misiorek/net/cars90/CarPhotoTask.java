@@ -9,6 +9,7 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -31,14 +32,15 @@ public class CarPhotoTask extends AsyncTask<String[], Integer, Bitmap> {
     @Override
     protected Bitmap doInBackground(String[]... params) {
         try {
+            Log.e("zz", params[0][0]);
             Integer id = Integer.parseInt(params[0][0]);
             String token = params[0][1];
             int biggerDimension = getBiggerDimension();
 
             ImageLoader loader = ImageLoader.getInstance();
-            loader.init(ImageLoaderConfiguration.createDefault(context));
+            loader.init(getImageConfig());
 
-            Log.e("urlString", urlString);
+            Log.e("urlString", String.format(urlString, id.intValue(), token, biggerDimension, biggerDimension));
 
             return loader.loadImageSync(String.format(urlString, id.intValue(), token, biggerDimension, biggerDimension));
 
@@ -69,5 +71,18 @@ public class CarPhotoTask extends AsyncTask<String[], Integer, Bitmap> {
         display.getSize(size);
 
         return size;
+    }
+
+    private ImageLoaderConfiguration getImageConfig() {
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                                        .cacheInMemory(true)
+                                        .cacheOnDisk(true)
+                                        .build();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+                                                .defaultDisplayImageOptions(options)
+                                                .build();
+
+        return config;
     }
 }
