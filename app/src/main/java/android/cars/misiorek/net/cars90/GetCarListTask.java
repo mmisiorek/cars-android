@@ -33,7 +33,7 @@ import java.util.Scanner;
  */
 public class GetCarListTask extends AsyncTask<ListView, Integer, List<Car>> {
 
-    final private static String urlString = "http://10.0.2.2:3000/cars.json";
+    final private static String urlString = "http://192.168.0.105:3000/cars.json";
 
     private ArrayAdapter<String> adapter;
     private List<Car> carsList;

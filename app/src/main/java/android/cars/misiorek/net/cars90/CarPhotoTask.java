@@ -18,7 +18,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  */
 public class CarPhotoTask extends AsyncTask<String[], Integer, Bitmap> {
 
-    private final static String urlString = "http://10.0.2.2:3000/document/%d/%s/%d/%d";
+    private final static String urlString = "http://192.168.0.105:3000/document/%d/%s/%d/%d";
 
     private ImageView imageView;
     private Context context;

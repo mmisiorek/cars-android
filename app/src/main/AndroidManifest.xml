@@ -24,6 +24,9 @@
             android:name=".CarPreviewActivity"
             android:label="@string/title_activity_car_preview"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SettingsActivity"
+                    android:label="SettingsActivity"
+                    android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

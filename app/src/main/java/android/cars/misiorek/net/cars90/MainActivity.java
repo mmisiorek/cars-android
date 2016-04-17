@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
     private void createCarListsAdapter() {
 
         LinkedList<String> list = new LinkedList<>();
-        list.add("hi!");
-        list.add("hello!");
 
         adapter = new ArrayAdapter<>(this, R.layout.row_main, list);
     }
@@ -101,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
