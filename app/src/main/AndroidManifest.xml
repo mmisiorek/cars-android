@@ -23,10 +23,25 @@
         <activity
             android:name=".CarPreviewActivity"
             android:label="@string/title_activity_car_preview"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SettingsActivity"
-                    android:label="SettingsActivity"
-                    android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.cars.misiorek.net.cars90.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CarEditActivity"
+            android:label="CarEditActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".CarPreviewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.cars.misiorek.net.cars90.CarPreviewActivity" />
+        </activity>
     </application>
 
 </manifest>

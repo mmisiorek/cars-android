@@ -104,6 +104,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.action_update_cars) {
+            ListView carsList = (ListView) findViewById(R.id.cars_list);
+            GetCarListTask task = new GetCarListTask();
+            task.execute(carsList);
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

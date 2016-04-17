@@ -13,4 +13,6 @@
     <string name="is_available_label">Is Available?</string>
     <string name="is_available">Available</string>
     <string name="is_unavailable">Unavailable</string>
+    <string name="refresh_cars">Refresh cars</string>
+    <string name="change_server_url">Change Server URL</string>
 </resources>

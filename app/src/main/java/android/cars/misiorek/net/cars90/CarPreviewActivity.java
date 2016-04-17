@@ -1,11 +1,10 @@
 package android.cars.misiorek.net.cars90;
 
-import android.app.ActionBar;
 import android.cars.misiorek.net.cars90.android.cars.misiorek.net.cars90.model.Car;
 import android.cars.misiorek.net.cars90.android.cars.misiorek.net.cars90.model.Gson;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,10 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class CarPreviewActivity extends AppCompatActivity {
 
@@ -28,6 +24,8 @@ public class CarPreviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_car_preview);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         try {
             car = Gson.getGson().fromJson(getIntent().getExtras().getString("car"), Car.class);
@@ -42,7 +40,7 @@ public class CarPreviewActivity extends AppCompatActivity {
 
             brandText.setText(car.getBrand());
             modelText.setText(car.getModel());
-            dateOfManufacturedText.setText(car.getManufacturedDate().toString());
+            dateOfManufacturedText.setText(getDefaultDateFormat().format(car.getManufacturedDate()));
             registrationNumberText.setText(car.getRegistrationNumber());
             isAvailableText.setText(car.getIsAvailable().booleanValue() ? getResources().getString(R.string.is_available) :
                                         getResources().getString(R.string.is_unavailable));
@@ -58,6 +56,22 @@ public class CarPreviewActivity extends AppCompatActivity {
             Log.e("z", Log.getStackTraceString(e));
         }
 
+        FloatingActionButton editCarBtn = (FloatingActionButton) findViewById(R.id.car_update_floating_btn);
+        editCarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CarEditActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    protected SimpleDateFormat getDefaultDateFormat() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        return format;
     }
 
 }
